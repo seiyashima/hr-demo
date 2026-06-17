@@ -51,7 +51,7 @@ HR_EVALUATION_RESPONSE = {
         {"label": "育成ポイント", "value": "ドキュメント化と後進育成の強化"},
         {"label": "上長コメント", "value": "重要顧客対応において高い成果を示し、チーム全体の生産性向上にも貢献しました。"},
     ],
-    "sources": ["Mock HR System", "Mock Performance Review DB", "Mock Manager Hierarchy"],
+    "sources": ["Workday", "Confluence", "SharePoint"],
 }
 
 MOCK_RESPONSES = {
@@ -63,7 +63,7 @@ MOCK_RESPONSES = {
             {"label": "上限", "value": "USD 100 per client / per event"},
             {"label": "例外申請", "value": "Compliance Portal から事前承認を申請"},
         ],
-        "sources": ["Mock Policy Portal", "Mock Compliance KB"],
+        "sources": ["Compliance System", "SharePoint", "Confluence"],
     },
     "smith account": {
         "title": "Smith Account Exception Approval",
@@ -73,7 +73,7 @@ MOCK_RESPONSES = {
             {"label": "承認日", "value": "2026-03-14"},
             {"label": "承認理由", "value": "Strategic client retention case"},
         ],
-        "sources": ["Mock CRM", "Mock Approval Workflow"],
+        "sources": ["Compliance System", "ServiceNow", "SharePoint"],
     },
     "trading system": {
         "title": "Trading System Access Request Process",
@@ -84,7 +84,7 @@ MOCK_RESPONSES = {
             {"label": "Step 3", "value": "Compliance Review"},
             {"label": "Step 4", "value": "IT Support による権限付与"},
         ],
-        "sources": ["Mock ITSM", "Mock Access Control Policy"],
+        "sources": ["ServiceNow", "Confluence", "SharePoint"],
     },
 }
 
@@ -116,7 +116,7 @@ def build_response(user_key: str, question: str) -> dict:
                 {"label": "理由", "value": "人事評価情報は本人による直接参照の対象外です。"},
                 {"label": "問い合わせ先", "value": "help@example.com"},
             ],
-            "sources": ["Mock ACL Policy", "Mock HR System"],
+            "sources": ["Workday", "Confluence", "SharePoint"],
         }
 
     q = question.lower()
@@ -134,7 +134,7 @@ def build_response(user_key: str, question: str) -> dict:
         "badge": "No result",
         "user": user_payload,
         "title": "該当情報なし",
-        "summary": "該当するモックデータは見つかりませんでした。デモ用の質問例を選択してください。",
+        "summary": "該当する情報は見つかりませんでした。質問内容を変えて再度お試しください。",
         "items": [],
         "sources": [],
     }
