@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Enterprise AI Search</title>
+  <title>ナレッジ統合検索</title>
   <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
   <main class="page">
     <header class="topbar">
       <div class="brand">
-        <span class="brand-mark">E</span>
-        <span>Enterprise AI Search</span>
+        <span class="brand-mark">K</span>
+        <span>ナレッジ統合検索</span>
       </div>
       <div class="user-area" aria-label="ログインユーザー情報">
         <div class="logged-in-user">
@@ -20,8 +20,8 @@
           <small id="loginUserRole">上司 / Manager</small>
         </div>
         <details class="demo-switcher">
-          <summary>デモ用切替</summary>
-          <select id="userSelect" aria-label="デモ用ユーザー切替">
+          <summary>アカウント切替</summary>
+          <select id="userSelect" aria-label="ユーザー切替">
             {% for key, user in users.items() %}
             <option value="{{ key }}" data-name="{{ user.name }}" data-role="{{ user.role }}" {% if key == 'jane' %}selected{% endif %}>{{ user.name }}</option>
             {% endfor %}
@@ -32,13 +32,20 @@
 
     <section class="hero">
       <div>
-        <p class="eyebrow">Secure Knowledge Access</p>
-        <h1>必要な情報へ、安全にアクセス</h1>
-        <p class="lead">ユーザー権限に応じて、回答できる情報だけを返します。</p>
+        <p class="eyebrow">Unified Knowledge Search</p>
+        <h1>ナレッジ統合検索</h1>
+        <p class="lead">社内に分散した情報を横断検索し、ユーザー権限に応じて必要な情報を提示します。</p>
       </div>
-      <div class="message-card">
-        <span class="pill">Policy-aware response</span>
-        <p>既存の権限を維持したまま、必要な人にだけ必要な情報を提示します。</p>
+      <div class="message-card connected-card">
+        <span class="pill">Connected Systems</span>
+        <p>ServiceNow、Workday、Compliance System、SharePoint、Confluence の情報を横断的に参照します。</p>
+        <div class="system-list" aria-label="接続システム">
+          <span>ServiceNow</span>
+          <span>Workday</span>
+          <span>Compliance System</span>
+          <span>SharePoint</span>
+          <span>Confluence</span>
+        </div>
       </div>
     </section>
 
@@ -64,7 +71,7 @@
         <div id="answerContent" class="answer-content" hidden>
           <div class="answer-header">
             <div>
-              <p class="eyebrow">AI Response</p>
+              <p class="eyebrow">検索結果</p>
               <h2 id="answerTitle"></h2>
             </div>
             <span id="answerBadge" class="status"></span>
