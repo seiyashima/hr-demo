@@ -96,19 +96,20 @@ def is_john_hr_question(question: str) -> bool:
 
 def build_response(user_key: str, question: str) -> dict:
     user = USERS.get(user_key, USERS["john"])
+    user_payload = asdict(user)
 
     if is_john_hr_question(question):
         if user.key == "jane":
             return {
                 "status": "allowed",
                 "badge": "Access granted",
-                "user": user,
+                "user": user_payload,
                 **HR_EVALUATION_RESPONSE,
             }
         return {
             "status": "denied",
             "badge": "Access denied",
-            "user": user,
+            "user": user_payload,
             "title": "権限不足",
             "summary": "確認する権限がありません。help@example.com にお問い合わせください。",
             "items": [
@@ -124,14 +125,14 @@ def build_response(user_key: str, question: str) -> dict:
             return {
                 "status": "allowed",
                 "badge": "Access granted",
-                "user": user,
+                "user": user_payload,
                 **response,
             }
 
     return {
         "status": "not_found",
         "badge": "No result",
-        "user": user,
+        "user": user_payload,
         "title": "該当情報なし",
         "summary": "該当するモックデータは見つかりませんでした。デモ用の質問例を選択してください。",
         "items": [],
