@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Enterprise AI Search ACL Demo</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Cloud Run Mock Demo</p>
+        <h1>Enterprise AI Search<br>権限制御デモ</h1>
+        <p class="lead">同じ質問でも、質問者の権限に応じてAI回答が変わることを示すデモです。</p>
+      </div>
+      <div class="message-card">
+        <span class="pill">Demo Message</span>
+        <p>既存の権限を維持したまま、必要な人にだけ必要な情報を返す。</p>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="panel control-panel">
+        <h2>1. 質問者を選択</h2>
+        <div class="user-options">
+          {% for key, user in users.items() %}
+          <label class="user-card">
+            <input type="radio" name="user" value="{{ key }}" {% if key == 'jane' %}checked{% endif %}>
+            <span class="avatar">{{ user.name[0] }}</span>
+            <span>
+              <strong>{{ user.name }}</strong>
+              <small>{{ user.role }}</small>
+            </span>
+          </label>
+          {% endfor %}
+        </div>
+
+        <h2>2. 質問を入力</h2>
+        <textarea id="question" rows="4">{{ initial_question }}</textarea>
+        <div class="quick-actions">
+          {% for question in quick_questions %}
+          <button type="button" class="quick" data-question="{{ question }}">{{ question }}</button>
+          {% endfor %}
+        </div>
+        <button id="askButton" class="primary">AIに質問する</button>
+      </div>
+
+      <div class="panel answer-panel">
+        <div class="answer-header">
+          <div>
+            <p class="eyebrow">AI Response</p>
+            <h2 id="answerTitle">{{ initial_answer.title }}</h2>
+          </div>
+          <span id="answerBadge" class="status allowed">{{ initial_answer.badge }}</span>
+        </div>
+        <div class="context-box">
+          <span>質問者</span>
+          <strong id="currentUser">{{ initial_user.name }} / {{ initial_user.role }}</strong>
+        </div>
+        <p id="answerSummary" class="summary">{{ initial_answer.summary }}</p>
+        <div id="answerItems" class="items">
+          {% for item in initial_answer.items %}
+          <div class="item"><span>{{ item.label }}</span><strong>{{ item.value }}</strong></div>
+          {% endfor %}
+        </div>
+        <div class="sources">
+          <span>参照ソース</span>
+          <div id="sources">
+            {% for source in initial_answer.sources %}
+            <em>{{ source }}</em>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="takeaway">
+      <div class="before">Before: 情報はあるが、誰が何を見られるべきかをAI回答に反映しづらい</div>
+      <div class="arrow">→</div>
+      <div class="after">After: ユーザー権限に応じて回答内容を制御し、安全にナレッジ活用</div>
+    </section>
+  </main>
+  <script src="/static/app.js"></script>
+</body>
+</html>
