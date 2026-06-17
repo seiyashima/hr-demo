@@ -60,14 +60,14 @@
         </div>
         <p id="answerSummary" class="summary">{{ initial_answer.summary }}</p>
         <div id="answerItems" class="items">
-          {% for item in initial_answer.items %}
+          {% for item in initial_answer["items"] %}
           <div class="item"><span>{{ item.label }}</span><strong>{{ item.value }}</strong></div>
           {% endfor %}
         </div>
         <div class="sources">
           <span>参照ソース</span>
           <div id="sources">
-            {% for source in initial_answer.sources %}
+            {% for source in initial_answer["sources"] %}
             <em>{{ source }}</em>
             {% endfor %}
           </div>
